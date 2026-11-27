@@ -1,0 +1,153 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    margin: 0;
+    background-color: #1c110a;
+    color: #faf6f0;
+    font-family: "Plus Jakarta Sans", "Inter", system-ui, -apple-system, sans-serif;
+  }
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.serif-display {
+  font-family: "Fraunces", Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+  letter-spacing: -0.02em;
+}
+
+/* Boutique Resort Glassmorphism & Warm Resort Glass */
+.resort-photo-backdrop {
+  background-color: #1c110a;
+  background-size: cover;
+  background-position: center 38%;
+}
+
+.resort-scrim-guest {
+  background: linear-gradient(
+    180deg,
+    rgba(28, 17, 10, 0.14) 0%,
+    rgba(36, 22, 13, 0.46) 38%,
+    rgba(26, 16, 9, 0.78) 72%,
+    rgba(18, 11, 6, 0.90) 100%
+  );
+}
+
+.resort-scrim-staff {
+  background: linear-gradient(
+    180deg,
+    rgba(24, 15, 9, 0.56) 0%,
+    rgba(26, 16, 10, 0.72) 45%,
+    rgba(18, 11, 6, 0.90) 100%
+  );
+}
+
+/* 4-Ingredient Non-Nested Frosted Glass */
+.glass-surface {
+  position: relative;
+  isolation: isolate;
+  background: rgba(255, 248, 240, 0.13);
+  backdrop-filter: blur(16px) saturate(165%);
+  -webkit-backdrop-filter: blur(16px) saturate(165%);
+  border: 1px solid rgba(255, 248, 240, 0.24);
+  box-shadow:
+    0 10px 28px rgba(10, 6, 3, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.30),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.14);
+}
+
+.glass-surface::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 252, 246, 0.55),
+    rgba(255, 255, 255, 0) 38%,
+    rgba(255, 255, 255, 0) 64%,
+    rgba(255, 248, 236, 0.22)
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.glass-surface::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.glass-card-heavy {
+  position: relative;
+  isolation: isolate;
+  background: rgba(30, 19, 12, 0.58);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid rgba(255, 248, 240, 0.26);
+  box-shadow:
+    0 14px 36px rgba(10, 6, 3, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.30),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.16);
+}
+
+.glass-toast {
+  background: rgba(24, 15, 9, 0.84);
+  backdrop-filter: blur(18px) saturate(150%);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  border: 1px solid rgba(255, 248, 240, 0.28);
+  box-shadow: 0 12px 30px rgba(8, 4, 2, 0.45);
+}
+
+.glass-text-shadow {
+  text-shadow: 0 1px 2px rgba(12, 7, 4, 0.45);
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .glass-surface,
+  .glass-card-heavy,
+  .glass-toast {
+    background: rgba(32, 20, 13, 0.86);
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .glass-surface,
+  .glass-card-heavy,
+  .glass-toast {
+    background: #241710;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  .glass-surface::after {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-motion="decorative"],
+  *:not([data-motion="essential"]):not([data-motion="fade"]) {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  [data-motion="fade"] {
+    transition-property: opacity !important;
+    transition-duration: 150ms !important;
+  }
+  [data-motion="essential"] {
+    animation-duration: 900ms !important;
+    animation-iteration-count: infinite !important;
+  }
+}
