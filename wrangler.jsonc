@@ -1,0 +1,29 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "frontdesk-tip",
+  "main": "src/worker.ts",
+  "compatibility_date": "2026-04-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/.netlify/functions/*"]
+  },
+  "vars": {
+    "VITE_SUPABASE_URL": "https://fvnknrxubrmihotdgssq.supabase.co",
+    "VITE_SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ2bmtucnh1YnJtaWhvdGRnc3NxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTU3NTcxNjgsImV4cCI6MjExMTMzMzE2OH0.ftoNBpLkxYhjId2w4mAnpxIZkZmp8CdtVnMnoVYr8Gc",
+    "SUPABASE_URL": "https://fvnknrxubrmihotdgssq.supabase.co",
+    "NETLIFY_CONTEXT": "deploy-preview",
+    "PAYMENT_MODE": "mock",
+    "EMAIL_MODE": "stub",
+    "OCR_MODE": "mock"
+  },
+  "triggers": {
+    "crons": [
+      "0 * * * *",
+      "0 9 * * 1",
+      "0 10 * * *"
+    ]
+  }
+}
