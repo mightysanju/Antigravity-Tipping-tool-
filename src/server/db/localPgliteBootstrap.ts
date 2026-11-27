@@ -2,7 +2,9 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { PGlite, type Transaction } from '@electric-sql/pglite';
 
-const ROOT_DIR = path.resolve(import.meta.dirname, '..', '..', '..');
+const ROOT_DIR = import.meta.dirname
+  ? path.resolve(import.meta.dirname, '..', '..', '..')
+  : '.';
 
 export const SEED_IDS = {
   users: {
