@@ -16,7 +16,8 @@
     "SUPABASE_URL": "https://fvnknrxubrmihotdgssq.supabase.co",
     "NETLIFY_CONTEXT": "deploy-preview",
     "PAYMENT_MODE": "mock",
-    "EMAIL_MODE": "stub",
+    "EMAIL_MODE": "resend",
+    "EMAIL_FROM": "FrontDesk Tip <onboarding@resend.dev>",
     "OCR_MODE": "mock"
   },
   "triggers": {
