@@ -12,6 +12,7 @@ import { handler as distributePool } from '../netlify/functions/distribute-pool.
 import { handler as exportTips } from '../netlify/functions/export-tips.ts';
 import { handler as generateQrCards } from '../netlify/functions/generate-qr-cards.ts';
 import { handler as joinByQr } from '../netlify/functions/join-by-qr.ts';
+import { handler as loginContext } from '../netlify/functions/login-context.ts';
 import { handler as parseAssignmentSheet } from '../netlify/functions/parse-assignment-sheet.ts';
 import { handler as reconcileStalePayoutsBackground } from '../netlify/functions/reconcile-stale-payouts-background.ts';
 import { handler as refundTip } from '../netlify/functions/refund-tip.ts';
@@ -51,6 +52,7 @@ const FUNCTION_ROUTES: Record<string, Handler> = {
   'export-tips': exportTips,
   'generate-qr-cards': generateQrCards,
   'join-by-qr': joinByQr,
+  'login-context': loginContext,
   'parse-assignment-sheet': parseAssignmentSheet,
   'reconcile-stale-payouts-background': reconcileStalePayoutsBackground,
   'refund-tip': refundTip,
