@@ -18,6 +18,7 @@ import { JoinPropertyPage } from './routes/auth/JoinPropertyPage';
 import { LoginPage } from './routes/auth/LoginPage';
 import { StaffPortalPage } from './routes/staff/StaffPortalPage';
 import { SuperIntegrationsPage } from './routes/super/SuperIntegrationsPage';
+import { LandingPage } from './routes/LandingPage';
 import { getRoleHomeRoute } from './shared/types';
 
 function RootRedirect() {
@@ -137,8 +138,8 @@ export function App() {
                 }
               />
 
-              {/* Fallback to Role Home / Login (No Unlisted Screens) */}
-              <Route path="/" element={<RootRedirect />} />
+              {/* Public Landing Page */}
+              <Route path="/" element={<LandingPage />} />
               <Route path="*" element={<RootRedirect />} />
             </Routes>
             <DevPersonaBar />
