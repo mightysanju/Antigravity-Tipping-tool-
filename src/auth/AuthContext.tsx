@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 import { supabase } from '../lib/supabaseClient';
-import { setApiDevCaller } from '../lib/apiClient';
+import { callLoginContext, setApiDevCaller } from '../lib/apiClient';
 import type { AppRole, AuthSessionUser } from '../shared/types';
 
 export type DevPersonaKey =
@@ -136,21 +136,36 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           return;
         }
 
-        const role = extractRoleFromClaims(session.user.app_metadata);
+        let role = extractRoleFromClaims(session.user.app_metadata);
+        let propertyId = (session.user.app_metadata?.property_id as string | null | undefined) ?? null;
+        let departmentId = (session.user.app_metadata?.department_id as string | null | undefined) ?? null;
+        let personId = (session.user.app_metadata?.person_id as string | null | undefined) ?? null;
+        let displayName =
+          (session.user.user_metadata?.name as string | undefined) ?? session.user.email ?? 'User';
+
         if (!role) {
-          setUser(null);
-          setLoading(false);
-          return;
+          const ctx = await callLoginContext().catch(() => null);
+          if (!active) return;
+          const ctxRole = ctx?.authenticated ? extractRoleFromClaims({ app_role: ctx.role }) : null;
+          if (!ctxRole) {
+            setUser(null);
+            setLoading(false);
+            return;
+          }
+          role = ctxRole;
+          propertyId = ctx?.propertyId ?? propertyId;
+          personId = ctx?.personId ?? personId;
+          if (ctx?.personName) displayName = ctx.personName;
         }
 
         setUser({
           authUserId: session.user.id,
           email: session.user.email ?? '',
-          name: (session.user.user_metadata?.name as string | undefined) ?? session.user.email ?? 'User',
+          name: displayName,
           role,
-          propertyId: (session.user.app_metadata?.property_id as string | null | undefined) ?? null,
-          departmentId: (session.user.app_metadata?.department_id as string | null | undefined) ?? null,
-          personId: (session.user.app_metadata?.person_id as string | null | undefined) ?? null,
+          propertyId,
+          departmentId,
+          personId,
           status: 'active',
           agreementSignedAt: null,
         });
